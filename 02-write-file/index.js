@@ -1,14 +1,22 @@
 const { stdin, stdout, exit } = process;
 const path = require('path');
 const fs = require('fs');
-const output = fs.createWriteStream(path.join(__dirname, 'destination.txt'));
 const outputFileName = 'output.txt';
 const outputFileAbsolutName = path.join(__dirname, outputFileName);
+const output = fs.createWriteStream(outputFileAbsolutName);
 
-stdout.write("Please, enter your name:\n")
+stdout.write("Hello! Please enter any text:\n")
+
 stdin.on('data', data => {
-  stdout.write(`Hello ${data}`);
+  if (data.toString() === 'exit\n') {
+    stdout.write('\nThanks, bye!');
+    exit();
+  }
   output.write(data);
-  exit();
+  console.log(data.toString());
 })
 
+process.on('SIGINT', () => {
+  stdout.write('\nThanks, bye!\n');
+  exit();
+})

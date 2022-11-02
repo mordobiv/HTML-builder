@@ -51,7 +51,7 @@ function composeHtml() {
   })
 }
 
-function copyAssets(oldPath, newPath) {
+function copyAssets() {
   const assetsAbsolutePath = path.join(__dirname, 'assets');
   const newAssetsAbsolutePath = path.join(mainDirAbsolutePath, 'assets');
   removeAndCreateDir(newAssetsAbsolutePath, function proceedDir(dirname) {
