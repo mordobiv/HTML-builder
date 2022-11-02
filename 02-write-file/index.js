@@ -9,14 +9,13 @@ stdout.write("Hello! Please enter any text:\n")
 
 stdin.on('data', data => {
   if (data.toString() === 'exit\n') {
-    stdout.write('\nThanks, bye!');
+    stdout.write('\nThanks, bye!\n');
     exit();
   }
   output.write(data);
-  console.log(data.toString());
 })
 
 process.on('SIGINT', () => {
-  stdout.write('\nThanks, bye!\n');
+  stdout.write('\n\nThanks, bye!\n');
   exit();
 })
