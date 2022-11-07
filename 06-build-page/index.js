@@ -97,7 +97,7 @@ function proceedStyles () {
         if (parsedFile.ext !== '.css' || !file.isFile) continue;
   
         const input = fs.createReadStream(path.join(stylesAbsolutePath, file.name), 'utf-8');
-        input.pipe(output);
+        input.on('data', chunk => output.write(chunk + '\n'));
       }
     }
   )
