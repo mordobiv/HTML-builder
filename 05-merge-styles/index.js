@@ -13,14 +13,13 @@ fs.rm(bundleFileAbsolutePath, { force: true }, (err) => {
   (err, files) => {
     if (err) return console.error(err);
 
-    let filesContent = '';
     const output = fs.createWriteStream(bundleFileAbsolutePath);
     for (file of files) {
       let parsedFile = path.parse(file.name);
       if (parsedFile.ext !== '.css' || !file.isFile()) continue;
 
       const input = fs.createReadStream(path.join(stylesDirAbsolutePath, file.name), 'utf-8');
-      input.pipe(output);
+      input.on('data', chunk => output.write(chunk + '\n'));
     }
   })
 })
