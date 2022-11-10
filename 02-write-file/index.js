@@ -12,6 +12,10 @@ stdin.on('data', data => {
     stdout.write('\nThanks, bye!\n');
     exit();
   }
+  if (data.toString().trim() === 'exit') {
+    stdout.write('\nThanks, bye!\n');
+    exit();
+  }
   output.write(data);
 })
 
